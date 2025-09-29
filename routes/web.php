@@ -3,8 +3,9 @@ use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    $employees = \App\Models\Employee::latest()->paginate(5);
+    return view('employees.index', compact('employees'));
 });
 
-Route::resource('employees',EmployeeController::class);
+Route::resource('employees', EmployeeController::class);
 
